@@ -1,0 +1,33 @@
+﻿@using System.Collections.Generic
+@rendermode InteractiveServer
+
+<h3>Queue Entry View</h3>
+
+<div class="mb-3">
+    <input type="text" class="form-control" @bind="inputValue" placeholder="Enter value" />
+    <button class="btn btn-primary mt-2" @onclick="AddToQueue">Add to Queue</button>
+</div>
+
+@if (queue.Count > 0)
+{
+    <ul class="list-group mt-3">
+        @foreach (var item in queue)
+        {
+            <li class="list-group-item">@item</li>
+        }
+    </ul>
+}
+
+@code {
+    private string inputValue = string.Empty;
+    private Queue<string> queue = new();
+
+    private void AddToQueue()
+    {
+        if (!string.IsNullOrWhiteSpace(inputValue))
+        {
+            queue.Enqueue(inputValue);
+            inputValue = string.Empty;
+        }
+    }
+}

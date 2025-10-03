@@ -1,0 +1,14 @@
+﻿@page "/authowner"
+
+@using Exchange56.RoleAccessEnum;
+@using Microsoft.AspNetCore.Authorization
+
+@attribute [RoleAccessEnumAuthorize<DemoAppRoleRequirement>(DemoAppRoleRequirement.IsOwner)]
+
+<PageTitle>Auth</PageTitle>
+
+<h1>You are authenticated as owner</h1>
+
+<AuthorizeView>
+    Hello @context.User.Identity?.Name! owner
+</AuthorizeView>
