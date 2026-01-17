@@ -37,5 +37,40 @@ namespace Exchange56.RoleAccessEnum
     }
 
 
+    public class RoleAccessEnumAuthorizationPolicyProvider<T> : DefaultAuthorizationPolicyProvider where T : struct, System.Enum
+    {
+        private readonly AuthorizationOptions _options;
+        //private readonly IEnumerable<IRoleAccessEnumAuthorizationPolicy> _policytypes;
+
+        private List<string> _policyPrefix { get; set; }
+        public RoleAccessEnumAuthorizationPolicyProvider(IOptions<AuthorizationOptions> options)
+            : base(options)
+        {
+
+            _options = options.Value;
+            //_policytypes = enumPolicies;
+        }
+
+        public override async Task<AuthorizationPolicy?> GetPolicyAsync(string policyName)
+        {
+            string _policyPrefix = typeof(T).Name;
+
+            if (PolicyNameProvider<T>.IsValidPolicyName(policyName, _policyPrefix))
+            {
+                var permissions = PolicyNameProvider<T>.GetPermissionsFrom(policyName, _policyPrefix);
+
+                var policy = new AuthorizationPolicyBuilder()
+                    .AddRequirements(new RoleAccessEnumAuthorizationRequirement<T>(permissions))
+                    .Build();
+
+                return policy;
+            }
+
+            return null;
+        }
+
+    }
+
+
 
 }

@@ -116,9 +116,9 @@ namespace BlazorServerAspNetIdentityDemo
         public async Task<List<string>> GetRoles()
         {
             //return new List<string>();
-            return new List<string>() { RoleConstants.Owner };
+            //return new List<string>() { RoleConstants.Owner };
 
-            //return new List<string>() { RoleConstants.Developer };
+            return new List<string>() { RoleConstants.Developer };
         }
     }
 
