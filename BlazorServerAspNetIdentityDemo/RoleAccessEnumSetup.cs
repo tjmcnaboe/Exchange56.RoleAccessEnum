@@ -48,6 +48,7 @@ namespace BlazorServerAspNetIdentityDemo
         public DemoAppRoleRequirement Role { get; set; }
     }
 
+
     [Flags]
     public enum DemoAppRoleRequirement
     {
@@ -105,6 +106,8 @@ namespace BlazorServerAspNetIdentityDemo
         }
     }
 
+
+
     /// <summary>
     ///this is a stub for testing in aspnetcore this could inject the user manager and get roles from the user
     /// </summary>
@@ -113,7 +116,7 @@ namespace BlazorServerAspNetIdentityDemo
         public async Task<List<string>> GetRoles()
         {
             //return new List<string>();
-            return new List<string>() { RoleConstants.ProjectManager };
+            return new List<string>() { RoleConstants.Owner };
 
             //return new List<string>() { RoleConstants.Developer };
         }

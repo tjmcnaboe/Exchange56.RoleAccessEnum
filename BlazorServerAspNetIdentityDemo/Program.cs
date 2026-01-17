@@ -43,7 +43,7 @@ builder.Services.AddScoped<TestRoleProvider>();
 builder.Services.AddScoped<IUserRoleProvider>(provider => provider.GetRequiredService<TestRoleProvider>());
 
 
-builder.Services.AddSingleton<IRoleAccessEnumAuthorizationPolicy, AppAccessPolicy>();
+builder.Services.AddSingleton<IRoleAccessEnumAuthorizationPolicy, AppAccessPolicy<DemoAppRoleRequirement>>();
 builder.Services.AddScoped<IRolePermissionProvider<DemoAppRoleRequirement>, AppRolePermissionProvider>(); // provides the permissions assoscatied with a role
 builder.Services.AddScoped<IAuthorizationHandler, RoleAccessEnumAuthorizationHandler<DemoAppRoleRequirement>>();
 builder.Services.AddSingleton<IAuthorizationPolicyProvider, RoleAccessEnumAuthorizationPolicyProvider>();
